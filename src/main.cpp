@@ -487,10 +487,10 @@ int CInputStreamAdaptive::GetTime()
   return timeMs;
 }
 
-bool CInputStreamAdaptive::IsRealTimeStream()
-{
-  return m_session && m_session->IsLive();
-}
+//bool CInputStreamAdaptive::IsRealTimeStream()
+//{
+//  return m_session && m_session->IsLive();
+//}
 
 #if INPUTSTREAM_VERSION_LEVEL > 1
 int CInputStreamAdaptive::GetChapter()
