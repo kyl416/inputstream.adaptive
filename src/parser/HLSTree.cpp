@@ -802,15 +802,18 @@ bool adaptive::CHLSTree::ProcessChildManifest(PLAYLIST::CPeriod* period,
         }
 
         FreeSegments(period, rep);
-        rep->Timeline().Swap(newSegments);
 
         rep->SetStartNumber(mediaSequenceNbr);
+
+        // Update MEDIA-SEQUENCE for next period
+        mediaSequenceNbr += newSegments.GetSize();
+
+        rep->Timeline().Swap(newSegments);
       }
 
       isSkipUntilDiscont = false;
       ++discontCount;
 
-      mediaSequenceNbr += rep->Timeline().GetSize();
       currentSegNumber = mediaSequenceNbr;
 
       CPeriod* newPeriod = FindDiscontinuityPeriod(m_discontSeq + discontCount);
@@ -910,8 +913,7 @@ bool adaptive::CHLSTree::ProcessChildManifest(PLAYLIST::CPeriod* period,
   uint64_t totalTimeMs = 0;
   if (discontCount > 0 || m_hasDiscontSeq)
   {
-    // On live stream you dont know the period end, so dont set the period duration in advance
-    if (!m_isLive && adp->GetStreamType() != StreamType::SUBTITLE)
+    if (adp->GetStreamType() != StreamType::SUBTITLE)
     {
       uint64_t periodDuration =
           (rep->GetDuration() * m_periods[discontCount]->GetTimescale()) / rep->GetTimescale();
