@@ -96,13 +96,13 @@ namespace adaptive
     SortTree();
 
     // A manifest can provide live delay value, if not so we use our default
-    // value of 16 secs, this is needed to ensure an appropriate playback,
+    // value of 4 secs, this is needed to ensure an appropriate playback,
     // an add-on can override the delay to try fix edge use cases
     uint64_t liveDelay = CSrvBroker::GetKodiProps().GetLiveDelay();
-    if (liveDelay >= 16)
+    if (liveDelay >= 4)
       m_liveDelay = liveDelay;
-    else if (m_liveDelay < 16)
-      m_liveDelay = 16;
+    else if (m_liveDelay < 4)
+      m_liveDelay = 4;
 
     StartUpdateThread();
 
