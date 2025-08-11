@@ -100,7 +100,7 @@ namespace adaptive
     // an add-on can override the delay to try fix edge use cases
     uint64_t liveDelay = CSrvBroker::GetKodiProps().GetLiveDelay();
     if (liveDelay >= 4)
-      m_liveDelay = 4;
+      m_liveDelay = liveDelay;
     else if (m_liveDelay < 4)
       m_liveDelay = 4;
 
