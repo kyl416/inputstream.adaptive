@@ -378,7 +378,7 @@ void AdaptiveStream::worker()
 
       //! @todo: for live content we should calculate max attempts and sleep timing
       //! based on segment duration / playlist updates timing
-      size_t maxAttempts = m_tree->IsLive() ? 10 : 6;
+      size_t maxAttempts = m_tree->IsLive() ? 30 : 18;
       std::chrono::milliseconds msSleep = m_tree->IsLive() ? 1000ms : 500ms;
 
       //! @todo: Some streaming software offers subtitle tracks with missing fragments, usually live tv
